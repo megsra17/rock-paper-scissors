@@ -1,13 +1,19 @@
+//define variables for humans (wins, losses, ties)
+var w = 0;
+var t = 0;
+var l = 0;
 
- var game = function () {   
 //define Rock / Paper / Scissors
 var choice = ['R' , 'P', 'S']
+
+
+ var game = function () {   
+
 //define variable for computerChoice
 var robot = Math.floor(Math.random() * choice.length);
 var robotChoice = choice[robot];
 //define variable for humanChoice
 //var humanChoice = 
-//define variables for humans (wins, losses, ties)
 
 //prompt playerChoice
 var person = prompt('Enter R, P, or S:');
@@ -35,7 +41,7 @@ alert('Stats: \n  Wins: ' + w + '\n Losses: ' + l + '\n Ties: ' + t );
 //ask to play again
 
 var playAgain = confirm('Play Again') 
-    if (playAgain ){
+    if (playAgain){
         game();
     }
     //if play agin (restart)
