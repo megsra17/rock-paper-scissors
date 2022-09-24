@@ -1,3 +1,7 @@
+var rock = document.querySelector('#rock');
+var paper = document.querySelector('#paper');
+var scissors = document.querySelector('#scissors')
+
 //define variables for humans (wins, losses, ties)
 var w = 0;
 var t = 0;

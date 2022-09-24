@@ -60,7 +60,7 @@ h1 {
   font-size: 50px;
 }
 
-main {
+#choices-container {
   display: flex;
   justify-content: space-around;
   margin: 150px auto 0;
