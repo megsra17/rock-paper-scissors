@@ -3,13 +3,36 @@ var paperEl = document.querySelector('#paper');
 var scissorsEl = document.querySelector('#scissors')
 var humanScoreEl = document.querySelector('#human-score')
 var computerScoreEl = document.querySelector('#computer-score')
-
+var resultEl = document.querySelector('#result')
 var choicesElements = [rockEl, paperEl, scissorsEl];
 
 //define Rock / Paper / Scissors
 var choice = ['r' , 'p', 's']
 var humanScore = 0
 var computerScore = 0
+
+function updateScores(){
+    humanScoreEl.innerText = humanScore
+    computerScoreEl.innerText = computerScore
+}
+
+function showResults(personChoiceEl, robotChoiceEl, result){
+    resultEl.innerText = result
+    updateScores()
+     //hide all 3 imgs
+    choicesElements.forEach(function(el){
+        el.style.display = 'none'
+    })
+    personChoiceEl.style.display = "block"
+    robotChoiceEl.style.display = "block"
+
+    var personSpan = document.createElement('span')
+    personSpan.innerText = "You"
+    personChoiceEl.appendChild(personSpan)
+    var robotSpan = document.createElement('span')
+    robotSpan.innerText = "Computer"
+    robotChoiceEl.appendChild(robotSpan)
+}
 
 function startRound(event){
     var personChoiceEl = event.target;
@@ -39,14 +62,8 @@ function startRound(event){
         result = ('YOU LOST');
         computerScore++;
     }
-    
-    //hide all 3 imgs
-    choicesElements.forEach(function(img){
-        img.style.display = 'none'
-    })
-    personChoiceEl.style.display = "block"
-    robotChoiceEl.style.display = "block"
-        
+
+    showResults(personChoiceEl, robotChoiceEl, result)
 
 }
 
