@@ -1,53 +1,62 @@
-var rockImg = document.querySelector('#rock');
-var paperImg = document.querySelector('#paper');
-var scissorsImg = document.querySelector('#scissors')
+var rockEl = document.querySelector('#rock');
+var paperEl = document.querySelector('#paper');
+var scissorsEl = document.querySelector('#scissors')
 var humanScoreEl = document.querySelector('#human-score')
 var computerScoreEl = document.querySelector('#computer-score')
 
-
+var choicesElements = [rockEl, paperEl, scissorsEl];
 
 //define Rock / Paper / Scissors
-var choice = ['R' , 'P', 'S']
+var choice = ['r' , 'p', 's']
 var humanScore = 0
 var computerScore = 0
 
-function startRound(){
-    console.log("startround")
+function startRound(event){
+    var personChoiceEl = event.target;
+    if(event.target.matches('img')){
+        personChoiceEl = event.target.parentElement
+    }else{
+        personChoiceEl = event.target
+    }
+    var personChoice = personChoiceEl.dataset.letter;
+
+    
+    var robot = Math.floor(Math.random() * choice.length);
+    var robotChoice = choice[robot];
+    var robotChoiceEl = document.querySelector('[data-letter="' + robotChoice +'"]')
+
+    var result
+    if (personChoice === robotChoice ) {
+        result= "TIED" ;
+    } else if ( 
+        (personChoice === 'r' && robotChoice === 's') ||
+        (personChoice === 'p' && robotChoice === 'r') ||
+        (personChoice === 's' && robotChoice === 'p')
+        ) {
+        humanScore++ ; 
+        result = "YOU WON"  
+    } else{
+        result = ('YOU LOST');
+        computerScore++;
+    }
+    
+    //hide all 3 imgs
+    choicesElements.forEach(function(img){
+        img.style.display = 'none'
+    })
+    personChoiceEl.style.display = "block"
+    robotChoiceEl.style.display = "block"
+        
+
 }
 
-rockImg.addEventListener('click', startRound)
-scissorsImg.addEventListener('click', startRound)
-paperImg.addEventListener('click', startRound)
+rockEl.addEventListener('click', startRound)
+scissorsEl.addEventListener('click', startRound)
+paperEl.addEventListener('click', startRound)
 
 
 //  var game = function () {   
 
-// //define variable for computerChoice
-// var robot = Math.floor(Math.random() * choice.length);
-// var robotChoice = choice[robot];
-// //define variable for humanChoice
-// //var humanChoice = 
-
-// //prompt playerChoice
-// var person = prompt('Enter R, P, or S:');
-// person = person.toUpperCase();
-// //prompt randomly computerChoice
-// alert("Computer choose:" + robotChoice);  
-// //compare choices
-// if (person === robotChoice ) {
-//     alert('Its a tie'); 
-//     t++ ;
-// } else if ( 
-//     (person === 'R' && robotChoice === 'S') ||
-//     (person === 'P' && robotChoice === 'R') ||
-//     (person === 'S' && robotChoice === 'P')
-//     ) {
-//      alert('Its a Win'); 
-//     w++ ;   
-// } else{
-//     alert('You Lose');
-//     l++;
-// }
 
 // //display total stats (wins, Losses, Ties)
 // alert('Stats: \n  Wins: ' + w + '\n Losses: ' + l + '\n Ties: ' + t );
