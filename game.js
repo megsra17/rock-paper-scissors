@@ -10,8 +10,10 @@ var choicesElements = [rockEl, paperEl, scissorsEl];
 var choice = ['r' , 'p', 's']
 var humanScore = 0
 var computerScore = 0
+var clickable = true
 
 function resetUI(){
+    clickable = true
     resultEl.innerText = ('Rock Paper Scissors')
     choicesElements.forEach(function(el){
         el.style.display = 'block';
@@ -30,6 +32,7 @@ function updateScores(){
 }
 
 function showResults(personChoiceEl, robotChoiceEl, result){
+    clickable = false
     resultEl.innerText = result
     updateScores()
      //hide all 3
@@ -58,6 +61,7 @@ function showResults(personChoiceEl, robotChoiceEl, result){
 }
 
 function startRound(event){
+    if (!clickable) return
     var personChoiceEl = event.target;
     if(event.target.matches('img')){
         personChoiceEl = event.target.parentElement
