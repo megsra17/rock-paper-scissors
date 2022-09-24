@@ -21,6 +21,8 @@
 body {
   padding: 5px;
   background-color: var(--body);
+  font-size: 25px;
+  font-family: "Rubik Dirt", cursive;
 }
 h1,
 h2,
@@ -45,4 +47,22 @@ blockquote {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+header {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  margin: 150px auto 0;
+  max-width: 1220px;
 }
