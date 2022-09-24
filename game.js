@@ -11,6 +11,19 @@ var choice = ['r' , 'p', 's']
 var humanScore = 0
 var computerScore = 0
 
+function resetUI(){
+    resultEl.innerText = ('Rock Paper Scissors')
+    choicesElements.forEach(function(el){
+        el.style.display = 'block';
+        el.classList.remove('loser');
+        var spans = el.querySelectorAll('span');
+        for (var i = 0; i < spans.length; i++){
+            spans[i].remove()
+        }
+        
+    })
+}
+
 function updateScores(){
     humanScoreEl.innerText = humanScore
     computerScoreEl.innerText = computerScore
@@ -19,7 +32,7 @@ function updateScores(){
 function showResults(personChoiceEl, robotChoiceEl, result){
     resultEl.innerText = result
     updateScores()
-     //hide all 3 imgs
+     //hide all 3
     choicesElements.forEach(function(el){
         el.style.display = 'none'
     })
@@ -32,6 +45,16 @@ function showResults(personChoiceEl, robotChoiceEl, result){
     var robotSpan = document.createElement('span')
     robotSpan.innerText = "Computer"
     robotChoiceEl.appendChild(robotSpan)
+
+    if (result === 'YOU WON'){
+        robotChoiceEl.classList.add('loser')
+    }else if (result === 'YOU LOST'){
+        personChoiceEl.classList.add('loser')
+    }
+
+    setTimeout(function(){
+        resetUI()
+    },3000)
 }
 
 function startRound(event){

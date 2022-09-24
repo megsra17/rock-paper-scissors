@@ -75,3 +75,7 @@ h1 {
   margin: 150px auto 0;
   max-width: 1220px;
 }
+
+.loser {
+  opacity: 0.5;
+}
