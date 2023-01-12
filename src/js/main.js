@@ -9,6 +9,8 @@ import {
   computerScoreEl,
 } from "./element";
 
+import { getRandomIdx } from "./helpers";
+
 //define Rock / Paper / Scissors
 var choice = ["r", "p", "s"];
 var humanScore = 0;
@@ -72,7 +74,7 @@ function startRound(event) {
   }
   var personChoice = personChoiceEl.dataset.letter;
 
-  var robot = Math.floor(Math.random() * choice.length);
+  var robot = getRandomIdx(choice.length);
   var robotChoice = choice[robot];
   var robotChoiceEl = document.querySelector(
     '[data-letter="' + robotChoice + '"]'
@@ -100,33 +102,10 @@ rockEl.addEventListener("click", startRound);
 scissorsEl.addEventListener("click", startRound);
 paperEl.addEventListener("click", startRound);
 
-//  var game = function () {
-
-// //display total stats (wins, Losses, Ties)
-// alert('Stats: \n  Wins: ' + w + '\n Losses: ' + l + '\n Ties: ' + t );
-// //ask to play again
-
-// var playAgain = confirm('Play Again')
-//     if (playAgain){
-//         game();
-//     }
-//     //if play agin (restart)
-//     //else stop game
-// };
-// game();
-
-// /*function greaterThan(x,y){
-// if(x>y){
-// return x;
-// }else {
-//     return y;
-// }
-// }*/
-
-// function sumNumber(x){
-//     var sum = 0;
-//     for(var i=1; i <= x; i++){
-//         sum += i;
-//     }
-//     return sum
-// }
+if (module.hot) {
+  module.hot.accept((err) => {
+    if (err) {
+      console.log("HRM Error", err);
+    }
+  });
+}

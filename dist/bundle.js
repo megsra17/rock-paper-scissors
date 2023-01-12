@@ -107,36 +107,7 @@ rockEl.addEventListener("click", startRound);
 scissorsEl.addEventListener("click", startRound);
 paperEl.addEventListener("click", startRound);
 
-//  var game = function () {
-
-// //display total stats (wins, Losses, Ties)
-// alert('Stats: \n  Wins: ' + w + '\n Losses: ' + l + '\n Ties: ' + t );
-// //ask to play again
-
-// var playAgain = confirm('Play Again')
-//     if (playAgain){
-//         game();
-//     }
-//     //if play agin (restart)
-//     //else stop game
-// };
-// game();
-
-// /*function greaterThan(x,y){
-// if(x>y){
-// return x;
-// }else {
-//     return y;
-// }
-// }*/
-
-// function sumNumber(x){
-//     var sum = 0;
-//     for(var i=1; i <= x; i++){
-//         sum += i;
-//     }
-//     return sum
-// }
+if (false) {}
 
 /******/ })()
 ;
