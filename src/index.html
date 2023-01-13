@@ -5,38 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
-    <link href="dist/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.min.css" />
 </head>
 
 <body>
     <header>
         <div>
-            Human: <scpan id="human-score">0</scpan>
+            Human: <span id="human-score">0</span>
         </div>
         <h1 id="result">Rock Paper Scissors</h1>
         <div>
-            Computer: <scpan id="computer-score">0</scpan>
+            Bot: <span id="bot-score">0</span>
         </div>
     </header>
+
     <main>
         <div id="choices-container">
+
             <div id="rock" class="choice" data-letter="r">
-                <img src="/images/rock.png" alt="rock" />
-            </div>
-            <div id="paper" class="choice" data-letter="p">
-                <img src="/images/paper.png" alt="paper" />
-            </div>
-            <div id="scissors" class="choice" data-letter="s">
-                <img src="/images/Scissors copy.png" alt="scissors" />
+                <img alt="rock" />
             </div>
 
+            <div id="paper" class="choice" data-letter="p">
+                <img alt="paper" />
+            </div>
+
+            <div id="scissors" class="choice" data-letter="s">
+                <img alt="scissors" />
+            </div>
         </div>
     </main>
-    <script src="dist/bundle.js"></script>
+
+    <script src="bundle.js"></script>
 </body>
 
 </html>

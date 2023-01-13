@@ -6,20 +6,31 @@ import {
   scissorsEl,
   resultEl,
   humanScoreEl,
-  computerScoreEl,
-} from "./element";
-
+  botScoreEl,
+} from "./elements.js";
 import { getRandomIdx } from "./helpers";
+import { registerSW } from "./register-sw";
 
-//define Rock / Paper / Scissors
-var choice = ["r", "p", "s"];
+//import images
+import RockImage from "../images/rock.png";
+import PaperImage from "../images/paper.png";
+import ScissorImage from "../images/scissors.png";
+
+//set img src attributes
+rockEl.querySelector("img").src = RockImage;
+scissorsEl.querySelector("img").src = ScissorImage;
+paperEl.querySelector("img").src = PaperImage;
+
+var choicesElements = [rockEl, paperEl, scissorsEl];
+var choices = ["r", "p", "s"];
 var humanScore = 0;
-var computerScore = 0;
+var botScore = 0;
 var clickable = true;
 
 function resetUI() {
   clickable = true;
   resultEl.innerText = "Rock Paper Scissors";
+  // show all three choices
   choicesElements.forEach(function (el) {
     el.style.display = "block";
     el.classList.remove("loser");
@@ -32,31 +43,32 @@ function resetUI() {
 
 function updateScores() {
   humanScoreEl.innerText = humanScore;
-  computerScoreEl.innerText = computerScore;
+  botScoreEl.innerText = botScore;
 }
 
-function showResults(personChoiceEl, robotChoiceEl, result) {
+function showResults(humanChosenEl, computerChosenEl, result) {
   clickable = false;
   resultEl.innerText = result;
   updateScores();
-  //hide all 3
+  // hide all three choice
   choicesElements.forEach(function (el) {
     el.style.display = "none";
   });
-  personChoiceEl.style.display = "block";
-  robotChoiceEl.style.display = "block";
+  humanChosenEl.style.display = "block";
+  computerChosenEl.style.display = "block";
 
-  var personSpan = document.createElement("span");
-  personSpan.innerText = "You";
-  personChoiceEl.appendChild(personSpan);
-  var robotSpan = document.createElement("span");
-  robotSpan.innerText = "Computer";
-  robotChoiceEl.appendChild(robotSpan);
+  var humanSpan = document.createElement("span");
+  humanSpan.innerText = "You";
+  humanChosenEl.appendChild(humanSpan);
 
-  if (result === "YOU WON") {
-    robotChoiceEl.classList.add("loser");
-  } else if (result === "YOU LOST") {
-    personChoiceEl.classList.add("loser");
+  var botSpan = document.createElement("span");
+  botSpan.innerText = "Bot";
+  computerChosenEl.appendChild(botSpan);
+
+  if (result === "YOU WON!") {
+    computerChosenEl.classList.add("loser");
+  } else if (result === "BOT WON!") {
+    humanChosenEl.classList.add("loser");
   }
 
   setTimeout(function () {
@@ -66,46 +78,44 @@ function showResults(personChoiceEl, robotChoiceEl, result) {
 
 function startRound(event) {
   if (!clickable) return;
-  var personChoiceEl = event.target;
-  if (event.target.matches("img")) {
-    personChoiceEl = event.target.parentElement;
-  } else {
-    personChoiceEl = event.target;
-  }
-  var personChoice = personChoiceEl.dataset.letter;
 
-  var robot = getRandomIdx(choice.length);
-  var robotChoice = choice[robot];
-  var robotChoiceEl = document.querySelector(
-    '[data-letter="' + robotChoice + '"]'
+  var humanChosenEl;
+  // make sure we're referring to the correct element
+  if (event.target.matches("img")) {
+    humanChosenEl = event.target.parentElement;
+  } else {
+    humanChosenEl = event.target;
+  }
+
+  var humanChoice = humanChosenEl.dataset.letter;
+
+  // randomly choose computerChoice
+  var random = getRandomIdx(choices.length);
+  var computerChoice = choices[random];
+  var computerChosenEl = document.querySelector(
+    '[data-letter="' + computerChoice + '"]'
   );
 
   var result;
-  if (personChoice === robotChoice) {
-    result = "TIED";
+  if (humanChoice === computerChoice) {
+    result = "TIED!";
   } else if (
-    (personChoice === "r" && robotChoice === "s") ||
-    (personChoice === "p" && robotChoice === "r") ||
-    (personChoice === "s" && robotChoice === "p")
+    (humanChoice === "r" && computerChoice === "s") ||
+    (humanChoice === "p" && computerChoice === "r") ||
+    (humanChoice === "s" && computerChoice === "p")
   ) {
     humanScore++;
-    result = "YOU WON";
+    result = "YOU WON!";
   } else {
-    result = "YOU LOST";
-    computerScore++;
+    botScore++;
+    result = "BOT WON!";
   }
 
-  showResults(personChoiceEl, robotChoiceEl, result);
+  showResults(humanChosenEl, computerChosenEl, result);
 }
 
 rockEl.addEventListener("click", startRound);
-scissorsEl.addEventListener("click", startRound);
 paperEl.addEventListener("click", startRound);
+scissorsEl.addEventListener("click", startRound);
 
-if (module.hot) {
-  module.hot.accept((err) => {
-    if (err) {
-      console.log("HRM Error", err);
-    }
-  });
-}
+registerSW();
